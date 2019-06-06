@@ -26,7 +26,6 @@ function startGame(){
   redDisplay.textContent = colors[index].red;
   greenDisplay.textContent = colors[index].green;
   blueDisplay.textContent = colors[index].blue;
-
 }
 function isRightClick(rgb){
   console.log("isRightClick(rgb) "+ rgb);
