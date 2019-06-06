@@ -5,6 +5,8 @@ var greenDisplay = document.querySelector("#green");
 var blueDisplay = document.querySelector("#blue");
 
 function startGame(){
+  isGameOver = false;
+    document.querySelector("header").style.backgroundColor = "#999FFF";
    var num = easyGame ? 3 : 6;
    var colors = getRandomColors(num);
    for(var i = 0; i < num; i++){
@@ -13,7 +15,7 @@ function startGame(){
    }
   //select the right guess
   var index = Math.floor(Math.random() * (+num - 1)); 
-  //set the header RGB display textContent
+  //set the header RGB display
   redDisplay.textContent = colors[index].red;
   greenDisplay.textContent = colors[index].green;
   blueDisplay.textContent = colors[index].blue;
@@ -54,8 +56,19 @@ var easyGame = false;
 var isGameOver = false;
 var easyButton = document.querySelector(".easy");
 var hardButton = document.querySelector(".hard");
+var newColors = document.querySelector(".new-game");
 var squeresList = document.querySelectorAll("li.squere");
 
+newColors.addEventListener("mouseover", function(){
+  this.style.color = "blue";
+});
+newColors.addEventListener("mouseout", function(){
+  this.style.color = "black";
+});
+newColors.addEventListener("click", function(){
+  this.textContent = "NEW COLORS";
+  startGame();
+});
 easyButton.addEventListener("mouseover", function(){
   this.style.color = "blue";
 });
@@ -88,21 +101,27 @@ hardButton.addEventListener("click", function(){
 
 squeresList.forEach(function(element){
     element.addEventListener("click", function(){
-        if(!isGameOver){
-          console.log("clicked!!! "+ element.style.backgroundColor);
-          var bkgColor = element.style.backgroundColor;
-          var color = element.style.backgroundColor.slice(4,bkgColor.indexOf(')')).split(', ');
-          if(isRightClick(color)){
-            isGameOver = true;
-            squeresList.forEach(function(squere){
-              squere.style.backgroundColor = bkgColor;
-            });
-          }
-          else{
-            element.style.backgroundColor =  "#232323";
-          }
-        }
+      if(!isGameOver){
+        onSquareClick(element);
+      }
     });
 });
+
+function onSquareClick(element){
+  console.log("clicked!!! "+ element.style.backgroundColor);
+  var bkgColor = element.style.backgroundColor;
+  var color = element.style.backgroundColor.slice(4,bkgColor.indexOf(')')).split(', ');
+  if(isRightClick(color)){
+    isGameOver = true;
+    newColors.textContent = "PLAY AGAIN?";
+    document.querySelector("header").style.backgroundColor = bkgColor;
+    squeresList.forEach(function(squere){
+        squere.style.backgroundColor = bkgColor;
+      });
+    }
+  else{
+    element.style.backgroundColor =  "#232323";
+  }
+}
 
 startGame();
