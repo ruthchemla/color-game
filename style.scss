@@ -5,11 +5,11 @@ body{
   background-color: #232323;
 }
 header{
-  background-color: #999FFF;
+  // background-color: #999FFF;
   display: flex;
   flex-direction: column;
   align-items: center;
-  p{
+  h1{
     font-size: 50px;
     color: white;
   }
@@ -17,10 +17,16 @@ header{
 #medium-bar{
   background-color: #FFFCCC;
   display: flex;
+  justify-content: center;
   small{
-    padding: 5px;
-  }  
-  margin-bottom: 30px;
+    border-radius: 10%;
+    padding: 10px;
+  } 
+  .new-game{
+    margin-right: 200px;
+    border-radius: 10%;
+  } 
+  padding : 2px 0;
 }
 .squereContainer{
   display: flex;
