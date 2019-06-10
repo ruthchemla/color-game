@@ -24,7 +24,7 @@ function startGame() {
       squaresList[i].style.backgroundColor = rgbToHex(color.red, color.green, color.blue);
   }
   //select the correct guess
-  var index = getRandomValue(0,5); 
+  var index = getRandomValue(0,num - 1); 
   //set the header RGB display
   redDisplay.textContent = colors[index].red;
   greenDisplay.textContent = colors[index].green;
