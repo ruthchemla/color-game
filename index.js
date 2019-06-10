@@ -8,6 +8,7 @@ var easyButton = document.querySelector(".easy");
 var hardButton = document.querySelector(".hard");
 var newColors = document.querySelector(".new-game");
 var squaresList = document.querySelectorAll("li.square");
+var modeButtons = document.querySelectorAll(".mode");
 
 var BG_COLOR = "#4e82b4";
 var isEasyGame = false;
@@ -77,29 +78,20 @@ function onSquareClick(element){
     }
 }
 
-newColors.addEventListener("mouseover", function(){
-  this.style.color = "white";
-  this.style.backgroundColor = BG_COLOR;
-});
-
-newColors.addEventListener("mouseout", function(){
-  this.style.color = "black";
+modeButtons.forEach(function(element){
+  element.addEventListener("mouseout", function(){
+  this.style.color = "inherit";
   this.style.backgroundColor = "transparent";
+});
+  element.addEventListener("mouseover", function(){
+  this.style.backgroundColor = BG_COLOR;
+  this.style.color = "white";
+});
 });
 
 newColors.addEventListener("click", function(){
   this.textContent = "NEW COLORS";
   startGame();
-});
-
-easyButton.addEventListener("mouseover", function(){
-  this.style.backgroundColor = BG_COLOR;
-  this.style.color = "white";
-});
-
-easyButton.addEventListener("mouseout", function(){
-  this.style.color = "black";
-  this.style.backgroundColor = "transparent";
 });
 
 easyButton.addEventListener("click", function(){
@@ -109,16 +101,6 @@ easyButton.addEventListener("click", function(){
     squaresList[i].style.visibility = "hidden"
   }
   startGame();
-});
-
-hardButton.addEventListener("mouseover", function(){
-  this.style.backgroundColor = BG_COLOR;
-  this.style.color = "white";
-});
-
-hardButton.addEventListener("mouseout", function(){
-  this.style.color = "black";
-  this.style.backgroundColor = "transparent";
 });
 
 hardButton.addEventListener("click", function(){
