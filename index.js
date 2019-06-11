@@ -4,23 +4,24 @@ import './style.scss';
 var redDisplay = document.querySelector(".red");
 var greenDisplay = document.querySelector(".green");
 var blueDisplay = document.querySelector(".blue");
-var easyButton = document.querySelector(".easy");
-var hardButton = document.querySelector(".hard");
+const easyButton = document.querySelector(".easy");
+const hardButton = document.querySelector(".hard");
 var newColors = document.querySelector(".new-game");
 var squaresList = document.querySelectorAll("li.square");
-var modeButtons = document.querySelectorAll(".mode");
+var headerElement = document.querySelector("header");
 
-var BG_COLOR = "#4e82b4";
+const BG_COLOR = "#4e82b4";
 var isEasyGame = false;
 var isGameOver = false;
 
 function startGame() {
   isGameOver = false;
-  document.querySelector("header").style.backgroundColor = BG_COLOR;
-  var num = isEasyGame ? 3 : 6;
+  headerElement.style.backgroundColor = BG_COLOR;
+  var num = getNumberSquares();
   var colors = getRandomColors(num);
   for(var i = 0; i < num; i++){
       var color = colors[i];
+      squaresList[i].style.visibility =  "visible";
       squaresList[i].style.backgroundColor = rgbToHex(color.red, color.green, color.blue);
   }
   //select the correct guess
@@ -61,33 +62,30 @@ function isCorrectClick(rgb){
   return (rgb[0] == redDisplay.textContent && rgb[1] == greenDisplay.textContent && rgb[2] == blueDisplay.textContent);
 }
 
+function getNumberSquares(){
+  return isEasyGame ? 3 : 6;
+}
+
 function onSquareClick(element){
     console.log("clicked!!! "+ element.style.backgroundColor);
-    var bkgColor = element.style.backgroundColor;
-    var color = element.style.backgroundColor.slice(4,bkgColor.indexOf(')')).split(', ');
+    var backgroundColor = element.style.backgroundColor;
+    var color = element.style.backgroundColor.slice(4,backgroundColor.indexOf(')')).split(', ');
     if(isCorrectClick(color)){
       isGameOver = true;
       newColors.textContent = "PLAY AGAIN?";
-      document.querySelector("header").style.backgroundColor = bkgColor;
-      squaresList.forEach(function(square){
-          square.style.backgroundColor = bkgColor;
-        });
+      headerElement.style.backgroundColor = backgroundColor;
+      var num = getNumberSquares();
+      for(var i = 0; i < num; i++){
+      // squaresList.forEach(function(square){
+        squaresList[i].style.visibility =  "visible";
+        squaresList[i].style.backgroundColor = backgroundColor;
       }
+    }
     else{
-      element.style.backgroundColor =  "#232323";
+      //failed guess then this square disapears 
+      element.style.visibility =  "hidden";
     }
 }
-
-modeButtons.forEach(function(element){
-  element.addEventListener("mouseout", function(){
-  this.style.color = "inherit";
-  this.style.backgroundColor = "transparent";
-});
-  element.addEventListener("mouseover", function(){
-  this.style.backgroundColor = BG_COLOR;
-  this.style.color = "white";
-});
-});
 
 newColors.addEventListener("click", function(){
   this.textContent = "NEW COLORS";
