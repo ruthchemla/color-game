@@ -1,0 +1,65 @@
+h1, h2 {
+  font-family: Lato;
+}
+
+body{
+  background-color: #232323;
+  font-family: "Montserrat","Avenir";
+}
+
+header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1{
+    color: white;
+    font-weight: normal;
+  }
+  #color-display{
+    margin: 0;
+    font-size: 500%;
+  }
+}
+
+.buttons-container{
+  background-color: #FFFCCC;
+  display: flex;
+  justify-content: center;
+  border: none;
+  height: 100%;
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;
+  font-size: inherit;
+  .mode{
+    transition: all 1.0s;
+    padding: 10px;
+    margin: 0;
+    
+    &:hover{
+      background: steelblue;
+      color: white;
+    }
+  } 
+  .new-game{
+    margin-right: 200px;
+  } 
+}
+
+.square-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  height: auto;
+  width: 550px;
+  .square{
+    $size: 150px;
+
+    height: $size;
+    width: $size;
+    background-color: grey;
+    margin: 10px;
+    border-radius: 25%;
+    list-style: none;
+  }
+}
